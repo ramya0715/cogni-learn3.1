@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Login · CLAPT</title>
+<link rel="stylesheet" href="../style.css"/></head>
+<body>
+<nav class="nav"><div class="nav-inner">
+  <a href="../index.html" class="brand"><span class="logo">◆</span> CLAPT</a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <button id="themeToggle" class="ghost-btn">🌙</button>
+  </div>
+</div></nav>
+
+<main class="page" style="max-width:460px;margin:60px auto">
+  <div class="panel" style="padding:32px">
+    <h1 class="page-title" style="margin-bottom:6px">Welcome back</h1>
+    <p class="page-sub" style="margin-bottom:22px">Log in to continue your adaptive prep journey.</p>
+    <form id="loginForm" class="auth-form">
+      <label>Username
+        <input type="text" id="username" autocomplete="username" required placeholder="your_username"/>
+      </label>
+      <label>Password
+        <input type="password" id="password" autocomplete="current-password" required placeholder="••••••••"/>
+      </label>
+      <label class="remember-row"><input type="checkbox" id="rememberMe" checked/> Remember this account on this device</label>
+      <div id="savedAccount" class="saved-account" style="display:none"></div>
+      <div id="err" class="auth-err"></div>
+      <button type="submit" class="btn primary" style="width:100%">Log in →</button>
+    </form>
+    <p style="margin-top:18px;text-align:center" class="muted">
+      New here? <a href="signup.html">Create an account</a>
+    </p>
+  </div>
+</main>
+
+<script src="../js/common.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+(function(){
+  if(CLAPT_AUTH.currentUser()){ location.replace('dashboard.html'); return; }
+  const f=document.getElementById('loginForm');
+  const err=document.getElementById('err');
+  const saved = CLAPT_AUTH.remembered && CLAPT_AUTH.remembered();
+  const savedBox = document.getElementById('savedAccount');
+  if(saved && saved.username){
+    username.value = saved.username;
+    if(saved.password){ password.value = saved.password; }
+    savedBox.style.display = 'block';
+    savedBox.innerHTML = 'Saved account: <b>@'+saved.username+'</b>. Your quiz history will load after login.';
+  }
+  f.addEventListener('submit', async (e)=>{
+    e.preventDefault(); err.textContent='';
+    try{
+      await CLAPT_AUTH.login(username.value, password.value, rememberMe.checked);
+      location.href='dashboard.html';
+    }catch(ex){ err.textContent = ex.message; }
+  });
+})();
+</script>
+</body>
+</html>
