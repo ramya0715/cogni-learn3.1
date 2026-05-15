@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Admin · CLAPT</title>
+<link rel="stylesheet" href="../style.css"/></head>
+<body>
+<nav class="nav"><div class="nav-inner">
+  <a href="../index.html" class="brand"><span class="logo">◆</span> CLAPT <span class="role-tag admin" style="margin-left:6px">ADMIN</span></a>
+  <div class="nav-links">
+    <a href="admin.html">Admin</a>
+    <a href="analytics.html">Analytics</a>
+    <button id="themeToggle" class="ghost-btn">🌙</button>
+  </div>
+</div></nav>
+
+<main class="page">
+  <div class="flex-between">
+    <div>
+      <h1 class="page-title">Teacher / Admin Dashboard</h1>
+      <p class="page-sub">Monitor students, share materials, and assign focused practice.</p>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi"><div class="lbl">Students</div><div id="kpiStudents" class="val">0</div></div>
+    <div class="kpi"><div class="lbl">Total Quizzes</div><div id="kpiQuizzes" class="val">0</div></div>
+    <div class="kpi"><div class="lbl">Avg Score</div><div id="kpiAvg" class="val">0%</div></div>
+    <div class="kpi"><div class="lbl">Admin Key</div><div class="val" style="font-size:18px">RvTech</div><div class="sub">share with co-teachers</div></div>
+  </div>
+
+  <div class="panels">
+    <div class="panel">
+      <h3>Students</h3>
+      <div id="studentList" class="list"></div>
+    </div>
+    <div class="panel">
+      <h3>Student Detail</h3>
+      <div id="studentDetail"></div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:18px">
+    <h3>Shared Preparation Materials</h3>
+    <p class="muted" style="margin-top:-4px">Visible to all students on their Recommendations page.</p>
+    <div class="mat-form">
+      <input id="matTitle" placeholder="Title (e.g. DBMS Cheat Sheet)"/>
+      <select id="matType">
+        <option value="note">Note</option>
+        <option value="pdf">PDF Link</option>
+        <option value="link">Resource Link</option>
+        <option value="file">File Reference</option>
+      </select>
+      <input id="matUrl" placeholder="URL (optional)"/>
+      <textarea id="matBody" rows="2" placeholder="Note content (optional)"></textarea>
+      <button id="matAdd" class="btn primary">+ Share Material</button>
+    </div>
+    <div id="materialsList" class="list" style="margin-top:12px"></div>
+  </div>
+</main>
+
+<script src="../js/common.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/admin.js"></script>
+<script src="../js/admin-page.js"></script>
+</body>
+</html>
